@@ -7,20 +7,7 @@
 #include "config.h"
 
 const uint8_t bsec_config_iaq[] = {
-/* Configure the BSEC library with information about the sensor
-    18v/33v = Voltage at Vdd. 1.8V or 3.3V
-    3s/300s = BSEC operating mode, BSEC_SAMPLE_RATE_LP or BSEC_SAMPLE_RATE_ULP
-    4d/28d = Operating age of the sensor in days
-    generic_18v_3s_4d
-    generic_18v_3s_28d
-    generic_18v_300s_4d
-    generic_18v_300s_28d
-    generic_33v_3s_4d
-    generic_33v_3s_28d
-    generic_33v_300s_4d
-    generic_33v_300s_28d
-*/
-#include "config/generic_33v_3s_4d/bsec_iaq.txt"
+#include BSEC_CONFIG_IAQ
 };
 
 #ifdef HTTPUpdateServer
@@ -60,7 +47,7 @@ void setup()
 
   loadState();
 
-  std::array<bsec_virtual_sensor_t, 7> ulpOutputs = {
+  std::array<bsec_virtual_sensor_t, 12> outputs = {
       BSEC_OUTPUT_RAW_GAS,
       BSEC_OUTPUT_IAQ,
       BSEC_OUTPUT_STATIC_IAQ,
@@ -68,8 +55,6 @@ void setup()
       BSEC_OUTPUT_BREATH_VOC_EQUIVALENT,
       BSEC_OUTPUT_STABILIZATION_STATUS,
       BSEC_OUTPUT_RUN_IN_STATUS,
-  };
-  std::array<bsec_virtual_sensor_t, 5> lpOutputs = {
       BSEC_OUTPUT_RAW_TEMPERATURE,
       BSEC_OUTPUT_RAW_PRESSURE,
       BSEC_OUTPUT_RAW_HUMIDITY,
@@ -77,8 +62,7 @@ void setup()
       BSEC_OUTPUT_SENSOR_HEAT_COMPENSATED_HUMIDITY,
   };
 
-  iaqSensor.updateSubscription(ulpOutputs.data(), ulpOutputs.size(), BSEC_SAMPLE_RATE_ULP);
-  iaqSensor.updateSubscription(lpOutputs.data(), lpOutputs.size(), BSEC_SAMPLE_RATE_LP);
+  iaqSensor.updateSubscription(outputs.data(), outputs.size(), BSEC_SAMPLE_RATE_LP);
 
   WiFi.setSleepMode(WIFI_NONE_SLEEP);
   WiFi.mode(WIFI_STA);

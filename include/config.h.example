@@ -8,6 +8,25 @@
 #define MQTT_USER "some_user"
 #define MQTT_PASS "hunter2"
 
+/* Configure the BSEC library with information about the sensor
+    18v/33v = Voltage at Vdd. 1.8V or 3.3V
+    3s/300s = BSEC operating mode, BSEC_SAMPLE_RATE_LP or BSEC_SAMPLE_RATE_ULP
+    4d/28d = Operating age of the sensor in days
+    generic_18v_3s_4d
+    generic_18v_3s_28d
+    generic_18v_300s_4d
+    generic_18v_300s_28d
+    generic_33v_3s_4d
+    generic_33v_3s_28d
+    generic_33v_300s_4d
+    generic_33v_300s_28d
+
+    Unless you know what you are doing, you want to use:
+    config/generic_33v_3s_4d/bsec_iaq.txt for "dynamic" environments (eg. mobile measurements)
+    config/generic_33v_3s_28d/bsec_iaq.txt for "stationary" environments (eg. indoor measurements in a fixed position)
+*/
+#define BSEC_CONFIG_IAQ "config/generic_33v_3s_4d/bsec_iaq.txt"
+
 #define HTTPUpdateServer
 #define USER_HTTP_USERNAME "some_user"
 #define USER_HTTP_PASSWORD "hunter3"
