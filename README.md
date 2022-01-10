@@ -2,6 +2,8 @@
 
 Indoor Air Quality sensor for Home Assistant using a BME680 gas sensor on a ESP8266 NodeMCU
 
+Note: superseded by [HomeMCU](https://github.com/Scrin/HomeMCU)
+
 ## Setup:
 
 - Clone/download this repository
